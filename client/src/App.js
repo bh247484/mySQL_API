@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import NewQuipForm from './components/NewQuipForm.js'
 import UpdateQuipForm from './components/UpdateQuipForm.js'
+import Navbarry from './components/Navbarry.js'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
   // ==================================================
   // --------------  Component Config -----------------
@@ -14,6 +20,11 @@ class App extends Component {
       displayForm: true,
       quips:  [],
       updateId: undefined,
+      updatePreFill: {
+        Quip: "placeholder",
+        Quipper: "placeholder",
+        image: "placeholder"
+      },
       showCreateForm: false,
       showUpdateForm: false,
     }
@@ -64,10 +75,11 @@ class App extends Component {
             .catch((err)=>{
               console.log(err)
             })
+        this.setState({showCreateForm: false})
   }
 
   deleteQuip = (e) =>{
-    let id = e.target.parentNode.getAttribute("id")
+    let id = e.target.getAttribute("id")
     console.log(id)
     // Delete Quip In React State
     let quips = this.state.quips.filter((quip)=> quip.id != id, 10)
@@ -123,13 +135,21 @@ class App extends Component {
 
   
   handleUpdateClick = (e) =>{
-    let updateId = e.target.parentNode.getAttribute("id")
-    this.setState({...this.state, updateId: updateId, showUpdateForm: true})
+    let updateId = e.target.getAttribute("id")
+    let updatedPreFill = this.state.quips.filter((quip)=>{
+      return updateId == quip.id
+    })
+    this.setState({...this.state, updateId: updateId, showUpdateForm: true, updatePreFill: updatedPreFill[0]})
   }
 
   toggleCreateForm = () =>{
-    let updated = !this.state.showCreateForm 
-    this.setState({showCreateFrom: updated})
+    let currentBool = this.state.showCreateForm
+    this.setState({showCreateForm: !currentBool})
+  }
+
+  toggleUpdateForm = () =>{
+    let currentBool = this.state.showUpdateForm
+    this.setState({showUpdateForm: !currentBool})
   }
 
   // ==================================================
@@ -138,16 +158,30 @@ class App extends Component {
 
   render(){
     let quips = this.state.quips.map((quip)=>(
-      <div key={quip.id} id={quip.id}>
-        <img src={quip.image} alt="The Quipper who Quip it is."></img>
-        <p>{quip.Quip} --- {quip.Quipper}</p><button onClick={this.deleteQuip}>Delete Quip</button><button onClick={this.handleUpdateClick}>Update Quip</button>
-      </div>
+      <Col>
+        <Card key={quip.id} style={{ width: '18rem' }}>
+          <Card.Img variant="top" src={quip.image} alt="The Quipper who Quip it is." />
+          <Card.Body>
+            <Card.Title>{quip.Quipper}</Card.Title>
+            <Card.Text>
+              "{quip.Quip}"
+            </Card.Text>
+            <Button variant="dark" id={quip.id} onClick={this.deleteQuip}>Delete Quip</Button>
+            <Button variant="dark" id={quip.id} onClick={this.handleUpdateClick}>Update Quip</Button>
+          </Card.Body>
+        </Card>
+      </Col>
     ));
     return (
       <div className="App">
-        <NewQuipForm toggleCreateForm={this.toggleCreateForm} createNewQuip={this.createNewQuip}/>
-        {this.state.showUpdateForm ? (<UpdateQuipForm toggleUpdateForm={this.toggleUpdateForm} updateQuip={this.updateQuip} quips={this.state.quips}updateId={this.state.updateId}/>):null}
-        {quips}
+        <Navbarry toggleCreateForm={this.toggleCreateForm}/>
+        <NewQuipForm toggleCreateForm={this.toggleCreateForm} createNewQuip={this.createNewQuip} showCreateForm={this.state.showCreateForm}/>
+        <UpdateQuipForm toggleUpdateForm={this.toggleUpdateForm} showUpdateForm={this.state.showUpdateForm} updateQuip={this.updateQuip} updatePreFill={this.state.updatePreFill} updateId={this.state.updateId}/>
+        <Container>
+          <Row>
+            {quips}
+          </Row>
+        </Container>
       </div>
     );
   }
