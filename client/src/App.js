@@ -17,7 +17,6 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      displayForm: true,
       quips:  [],
       updateId: undefined,
       updatePreFill: {
@@ -33,8 +32,6 @@ class App extends Component {
     this.deleteQuip = this.deleteQuip.bind(this)
     this.updateQuip = this.updateQuip.bind(this)
     this.handleUpdateClick = this.handleUpdateClick.bind(this)
-    
-    
   }
 
   // ==================================================

@@ -24,7 +24,7 @@ let testDB = mysql.createConnection({
   });
 
 // Connect
-// MySQL version above 5.6 ...
+// Middleware does not support new mySQL 8.0 password auth, either revert to old auth method or use mySQL version 5.7
 testDB.connect((err) => {
     if(err){
         throw err;
@@ -119,6 +119,6 @@ app.delete('/api/deletequip/:id', (req, res)=>{
   
 
 app.listen(8000, (req, res)=>{
-    console.log("Server is live on Port 3000")
+    console.log("Server is live on Port 8000")
 })
 

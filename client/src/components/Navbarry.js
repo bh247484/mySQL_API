@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
-import Octicon, {Quote, Pencil} from '@primer/octicons-react' 
+import Octicon, {Pencil} from '@primer/octicons-react' 
 
 const Navbarry = (props) =>{
     return(
