@@ -36,7 +36,7 @@ class NewQuipForm extends Component{
     <div>
         <Modal show={this.props.showCreateForm} onHide={this.props.toggleCreateForm}>      
             <Modal.Dialog>
-                <Modal.Header closeButton>
+                <Modal.Header style={{backgroundColor: "#984d65"}} closeButton>
                     <Modal.Title>Add New Quip</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={this.handleSubmit}>
@@ -55,10 +55,9 @@ class NewQuipForm extends Component{
                             <input type="text" id="Image" className="form-control" name="image" onChange={this.handleChange} value={this.state.image || ""}></input>
                         </div>
                     </Modal.Body>
-                    
-                <Modal.Footer className="bg-dark">
-                <button type="submit">Submit</button>
-                </Modal.Footer>
+                    <Modal.Footer style={{backgroundColor: "#220e19"}}>
+                        <Button style={{backgroundColor: "#571c33", border: "none"}} type="submit">Submit</Button>
+                    </Modal.Footer>
                 </form>
             </Modal.Dialog>
         </Modal>

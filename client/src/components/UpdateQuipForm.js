@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 
 
 class UpdateQuipForm extends Component{
@@ -29,20 +28,11 @@ class UpdateQuipForm extends Component{
     }
 
     render(){
-        if(this.props.showUpdateForm){
-            // let inputQuip = document.querySelectorAll(".QuipForm")
-            // inputQuip.value = this.props.updatePreFill.Quip
-            console.log("change val")
-        }
-        
-        console.log(this.props.updatePreFill)
-        
         return(
             <div>
-
                 <Modal show={this.props.showUpdateForm} onHide={this.props.toggleUpdateForm}>      
                     <Modal.Dialog>
-                        <Modal.Header closeButton>
+                        <Modal.Header style={{backgroundColor: "#984d65"}} closeButton>
                             <Modal.Title>Update Quip</Modal.Title>
                         </Modal.Header>
                         <form onSubmit={this.handleUpdate}>
@@ -59,12 +49,10 @@ class UpdateQuipForm extends Component{
                                     <label htmlFor="Image">Image: </label>
                                     <input type="text" id="Image" className="form-control" name="image" onChange={this.handleChange} value={this.state.image === "" && this.props.showUpdateForm === true ? this.props.updatePreFill.image : this.state.image}></input>
                                 </div>
-
                             </Modal.Body>
-                            
-                        <Modal.Footer className="bg-dark">
-                        <button type="submit">Update</button>
-                        </Modal.Footer>
+                            <Modal.Footer style={{backgroundColor: "#220e19"}}>
+                                <Button style={{backgroundColor: "#571c33", border: "none"}} type="submit">Update</Button>
+                            </Modal.Footer>
                         </form>
                     </Modal.Dialog>
                 </Modal> 

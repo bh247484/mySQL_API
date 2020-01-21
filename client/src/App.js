@@ -166,8 +166,8 @@ class App extends Component {
             <Card.Text>
               "{quip.Quip}"
             </Card.Text>
-            <Button variant="dark" id={quip.id} onClick={this.deleteQuip}>Delete Quip</Button>
-            <Button variant="dark" id={quip.id} onClick={this.handleUpdateClick}>Update Quip</Button>
+            <Button style={{backgroundColor: "#571c33", border: "black"}} id={quip.id} onClick={this.deleteQuip}>Delete Quip</Button>
+            <Button style={{backgroundColor: "#220e19", border: "black"}} id={quip.id} onClick={this.handleUpdateClick}>Update Quip</Button>
           </Card.Body>
         </Card>
       </Col>
