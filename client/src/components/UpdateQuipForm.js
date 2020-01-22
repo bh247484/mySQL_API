@@ -17,7 +17,30 @@ class UpdateQuipForm extends Component{
 
     handleUpdate = (e) =>{
         e.preventDefault()
-        this.props.updateQuip(this.state, this.props.updateId)
+        let updatedQuip = {}
+        let currentState = this.state
+
+        if(currentState.quipper === ""){
+            updatedQuip.quipper = this.props.updatePreFill.Quipper
+        } else {
+            console.log("else")
+            updatedQuip.quipper = currentState.quipper
+        }
+        if(currentState.quip === ""){
+            updatedQuip.quip = this.props.updatePreFill.Quip
+        } else {
+            console.log("else")
+            updatedQuip.quip = currentState.quip
+        }
+        if(currentState.image === ""){
+            updatedQuip.image = this.props.updatePreFill.image
+        } else {
+            console.log("else")
+            updatedQuip.image = currentState.image
+        }
+        
+        console.log("updated Quip", updatedQuip)
+        this.props.updateQuip(updatedQuip, this.props.updateId)
         this.setState({quipper: "", quip: "", image: ""})
     }
 
