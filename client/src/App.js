@@ -105,7 +105,7 @@ class App extends Component {
     }
 
     let quips = this.state.quips.map((quip)=>{
-      if(quip.id === parseInt(id, 10)){
+      if(quip.id == editedQuip.id){
         return editedQuip
       } else {
         return quip
